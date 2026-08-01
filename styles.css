@@ -1,0 +1,243 @@
+/* ===========================================================
+   mashabakes — a home baker's photo journal
+   Design: warm kitchen-notebook. Handwritten script logo,
+   Cyrillic-friendly serif body, cards styled like recipe
+   index cards tucked into a journal, numbered by entry.
+   =========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&display=swap');
+
+:root{
+  --cream:        #FBF3E3;
+  --card:         #FFFCF5;
+  --espresso:     #3A2718;
+  --espresso-70:  #3A271Bb3;
+  --honey:        #C6871F;
+  --honey-dark:   #9C6412;
+  --jam:          #A63A2E;
+  --taupe:        #8B7A63;
+  --line:         #E4D5B7;
+  --shadow:       0 10px 24px -12px rgba(58,39,24,0.35);
+  --radius:       3px;
+}
+
+*{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse at top left, #FFF8E9 0%, var(--cream) 45%),
+    var(--cream);
+  color:var(--espresso);
+  font-family:'PT Serif', Georgia, serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* subtle paper grain overlay */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:0.5;
+  z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.23  0 0 0 0 0.16  0 0 0 0 0.09  0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+a{ color:inherit; }
+
+.wrap{
+  max-width:1180px;
+  margin:0 auto;
+  padding:0 28px;
+  position:relative;
+  z-index:1;
+}
+
+/* ---------- Header ---------- */
+
+header.site-head{
+  padding:56px 0 30px;
+  text-align:center;
+  position:relative;
+}
+
+.logo{
+  font-family:'Caveat', cursive;
+  font-weight:700;
+  font-size:clamp(3.2rem, 8vw, 5.4rem);
+  color:var(--jam);
+  line-height:1;
+  margin:0;
+  transform:rotate(-2deg);
+  display:inline-block;
+}
+
+.logo .dot{
+  color:var(--honey);
+}
+
+.tagline{
+  font-family:'PT Sans', sans-serif;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  font-size:0.72rem;
+  color:var(--taupe);
+  margin-top:6px;
+}
+
+.head-rule{
+  width:120px;
+  height:2px;
+  margin:22px auto 0;
+  background:
+    repeating-linear-gradient(90deg, var(--honey) 0 8px, transparent 8px 14px);
+  opacity:0.8;
+}
+
+/* ---------- Intro strip ---------- */
+
+.intro{
+  max-width:620px;
+  margin:26px auto 0;
+  text-align:center;
+  color:var(--espresso-70);
+  font-size:1.05rem;
+}
+
+/* ---------- Feed ---------- */
+
+.feed{
+  padding:56px 0 90px;
+  display:grid;
+  gap:64px;
+}
+
+.entry{
+  display:grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap:0;
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  position:relative;
+}
+
+.entry:nth-child(even){
+  grid-template-columns: 1.1fr 0.9fr;
+}
+.entry:nth-child(even) .entry-photo{ order:2; }
+.entry:nth-child(even) .entry-body{ order:1; }
+
+.entry-photo{
+  position:relative;
+  min-height:340px;
+  background:#e9e0cc;
+}
+
+.entry-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* washi-tape number tab */
+.tab{
+  position:absolute;
+  top:18px;
+  left:-10px;
+  background:var(--honey);
+  color:#fff8ec;
+  font-family:'PT Sans', sans-serif;
+  font-weight:700;
+  font-size:0.78rem;
+  letter-spacing:0.06em;
+  padding:7px 16px 7px 20px;
+  box-shadow:var(--shadow);
+  transform:rotate(-3deg);
+}
+.entry:nth-child(even) .tab{ left:auto; right:-10px; transform:rotate(3deg); }
+
+.entry-body{
+  padding:42px 44px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.entry-kind{
+  font-family:'PT Sans', sans-serif;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  font-size:0.7rem;
+  color:var(--honey-dark);
+  margin-bottom:10px;
+}
+
+.entry-title{
+  font-family:'Caveat', cursive;
+  font-weight:600;
+  font-size:2.6rem;
+  color:var(--jam);
+  margin:0 0 14px;
+  line-height:1.05;
+}
+
+.entry-text{
+  color:var(--espresso-70);
+  font-size:1.04rem;
+}
+
+/* ---------- Footer ---------- */
+
+footer{
+  text-align:center;
+  padding:40px 0 60px;
+  color:var(--taupe);
+  font-family:'PT Sans', sans-serif;
+  font-size:0.85rem;
+}
+
+/* ---------- Lightbox ---------- */
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(28,18,10,0.88);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
+  padding:24px;
+  cursor:zoom-out;
+}
+.lightbox.open{ display:flex; }
+.lightbox img{
+  max-width:100%;
+  max-height:92vh;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  border-radius:2px;
+}
+.entry-photo{ cursor:zoom-in; }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 800px){
+  .entry, .entry:nth-child(even){
+    grid-template-columns: 1fr;
+  }
+  .entry:nth-child(even) .entry-photo,
+  .entry:nth-child(even) .entry-body{ order:initial; }
+  .entry-photo{ min-height:280px; }
+  .entry-body{ padding:30px 26px; }
+  .feed{ gap:44px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+}
